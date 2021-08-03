@@ -1,0 +1,13 @@
+query getSearchResults($query: String!) {
+    getSearchResults(query: $query) {
+        totalCount
+        edges {
+            node {
+                name
+                styles
+                abv
+                category
+            }
+        }
+    }
+}
