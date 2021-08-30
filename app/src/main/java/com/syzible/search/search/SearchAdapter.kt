@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.syzible.search.R
 
 class SearchAdapter(
-    private val searchResultCallback: SearchResultCallback
+    private val callback: SearchResultCallback
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private var results: List<SearchResult> = emptyList()
@@ -33,7 +33,7 @@ class SearchAdapter(
         holder.abv.text = abv
 
         holder.itemView.setOnClickListener {
-            searchResultCallback.onClick(result)
+            callback.onClick(result)
         }
     }
 
