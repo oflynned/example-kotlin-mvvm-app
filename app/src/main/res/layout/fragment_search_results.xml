@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".search.SearchFragment">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search_box_card"
@@ -26,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_baseline_search_24">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.syzible.search.presentation.search.DebouncedTextInputEditText
                 android:id="@+id/search_box_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
