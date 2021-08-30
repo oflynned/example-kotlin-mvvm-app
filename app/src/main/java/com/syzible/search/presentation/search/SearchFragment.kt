@@ -1,4 +1,4 @@
-package com.syzible.search.search
+package com.syzible.search.presentation.search
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.syzible.search.data.SearchResult
 import com.syzible.search.databinding.FragmentSearchResultsBinding
 import dagger.hilt.android.AndroidEntryPoint
 

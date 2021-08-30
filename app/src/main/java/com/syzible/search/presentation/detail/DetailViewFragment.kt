@@ -1,4 +1,4 @@
-package com.syzible.search.detailview
+package com.syzible.search.presentation.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
