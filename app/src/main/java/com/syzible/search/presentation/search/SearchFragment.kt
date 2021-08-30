@@ -1,8 +1,6 @@
 package com.syzible.search.presentation.search
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +11,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syzible.search.data.SearchResult
 import com.syzible.search.databinding.FragmentSearchResultsBinding
-import com.syzible.search.utils.ViewState
+import com.syzible.search.presentation.state.ViewState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 @AndroidEntryPoint
-class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
+class SearchFragment : Fragment(), SearchResultCallback {
     private var _binding: FragmentSearchResultsBinding? = null
     private val binding get() = _binding!!
 
@@ -35,42 +37,39 @@ class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.searchBoxEditText.setOnDebounceTextWatcher(lifecycle) { input ->
+            run {
+                if (input.isNotEmpty()) {
+                    lifecycleScope.launchWhenCreated {
+                        viewModel.search(input)
+                    }
+                }
+            }
+        }
+
         binding.searchResultRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.searchResultRecyclerView.adapter = adapter
-        binding.searchBoxEditText.addTextChangedListener(this)
 
         viewModel.searchResults.observe(viewLifecycleOwner, { result ->
-            when(result) {
-                is ViewState.Loading -> {}
+            when (result) {
+                is ViewState.Loading -> {
+                }
                 is ViewState.Success -> {
                     adapter.setList(result.value!!)
                     adapter.notifyDataSetChanged()
                 }
-                is ViewState.Error -> {}
+                is ViewState.Error -> {
+                }
             }
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.searchBoxEditText.removeOnDebounceTextWatcher()
         _binding = null
     }
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-        if (!s.isNullOrEmpty()) {
-            lifecycleScope.launchWhenCreated {
-                viewModel.search(s.toString())
-            }
-        }
-    }
 
     override fun onClick(result: SearchResult) {
         val action = SearchFragmentDirections.actionSearchResultsToDetailView(

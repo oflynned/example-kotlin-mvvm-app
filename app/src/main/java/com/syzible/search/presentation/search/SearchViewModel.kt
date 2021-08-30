@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.apollographql.apollo.exception.ApolloException
 import com.syzible.search.data.SearchResult
 import com.syzible.search.domain.GetSearchResultsUseCase
-import com.syzible.search.utils.ViewState
+import com.syzible.search.presentation.state.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
