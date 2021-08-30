@@ -6,21 +6,16 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syzible.search.databinding.FragmentSearchResultsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
-
-    companion object Constants {
-        const val defaultSearchTerm = "Hoegaarden"
-    }
-
     private var _binding: FragmentSearchResultsBinding? = null
     private val binding get() = _binding!!
 
@@ -46,11 +41,6 @@ class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
             adapter.setList(results)
             adapter.notifyDataSetChanged()
         })
-
-        lifecycleScope.launchWhenCreated {
-            binding.searchBoxEditText.setText(defaultSearchTerm)
-            viewModel.search(defaultSearchTerm)
-        }
     }
 
     override fun onDestroyView() {
@@ -75,6 +65,12 @@ class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
     }
 
     override fun onClick(result: SearchResult) {
-        Toast.makeText(context, result.name, Toast.LENGTH_SHORT).show()
+        val action = SearchFragmentDirections.actionSearchResultsToDetailView(
+            result.name,
+            "${result.abv}%",
+            result.styles.toTypedArray()
+        )
+
+        findNavController().navigate(action)
     }
 }

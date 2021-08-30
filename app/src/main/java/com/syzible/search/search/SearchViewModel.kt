@@ -19,7 +19,12 @@ class SearchViewModel @Inject constructor(
         val results: List<SearchResult> =
             response?.edges?.mapNotNull { edge ->
                 val node = edge!!.node!!
-                return@mapNotNull SearchResult(node.name, node.abv, node.category, node.styles)
+                return@mapNotNull SearchResult(
+                    node.name,
+                    node.abv,
+                    node.category,
+                    node.styles as ArrayList<String>
+                )
             } ?: emptyList()
 
         _searchResults.postValue(results)
