@@ -1,4 +1,4 @@
-package com.syzible.search.utils
+package com.syzible.search.presentation.state
 
 sealed class ViewState<T>(val value: T? = null, val message: String? = null) {
     class Success<T>(data: T) : ViewState<T>(data)
