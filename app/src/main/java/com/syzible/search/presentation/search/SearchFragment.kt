@@ -70,7 +70,6 @@ class SearchFragment : Fragment(), SearchResultCallback {
         _binding = null
     }
 
-
     override fun onClick(result: SearchResult) {
         val action = SearchFragmentDirections.actionSearchResultsToDetailView(
             result.name,
