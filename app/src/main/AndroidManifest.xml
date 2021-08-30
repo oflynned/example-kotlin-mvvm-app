@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="com.syzible.search.presentation.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Search">
         <activity
-            android:name=".MainActivity"
+            android:name="com.syzible.search.presentation.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Search.NoActionBar">
             <intent-filter>
