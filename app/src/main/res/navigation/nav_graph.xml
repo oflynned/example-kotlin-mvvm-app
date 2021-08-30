@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/SearchFragment"
-        android:name="com.syzible.search.search.SearchFragment"
+        android:name="com.syzible.search.presentation.search.SearchFragment"
         android:label="Search Results"
         tools:layout="@layout/fragment_search_results">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SearchDetailView"
-        android:name="com.syzible.search.detailview.DetailViewFragment"
+        android:name="com.syzible.search.presentation.detail.DetailViewFragment"
         android:label="Search Detail View"
         tools:layout="@layout/fragment_search_detail_view">
 
