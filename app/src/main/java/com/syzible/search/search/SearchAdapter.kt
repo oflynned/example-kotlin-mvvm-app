@@ -7,14 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.syzible.search.R
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(
+    private val searchResultCallback: SearchResultCallback
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private var results: List<SearchResult> = emptyList()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.search_result_name)
         val abv: TextView = view.findViewById(R.id.search_result_abv)
-        val styles: TextView = view.findViewById(R.id.search_result_styles)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,14 +27,13 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val result: SearchResult = results[position]
+        val abv = "${result.abv}%"
 
         holder.name.text = result.name
-        holder.abv.text = "${result.abv}%"
+        holder.abv.text = abv
 
-        if (result.styles.isNullOrEmpty()) {
-            holder.styles.visibility = View.GONE
-        } else {
-            holder.styles.text = result.styles.joinToString(", ")
+        holder.itemView.setOnClickListener {
+            searchResultCallback.onClick(result)
         }
     }
 
