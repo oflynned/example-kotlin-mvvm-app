@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syzible.search.data.SearchResult
 import com.syzible.search.databinding.FragmentSearchResultsBinding
+import com.syzible.search.utils.ViewState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,9 +39,15 @@ class SearchFragment : Fragment(), TextWatcher, SearchResultCallback {
         binding.searchResultRecyclerView.adapter = adapter
         binding.searchBoxEditText.addTextChangedListener(this)
 
-        viewModel.searchResults.observe(viewLifecycleOwner, { results ->
-            adapter.setList(results)
-            adapter.notifyDataSetChanged()
+        viewModel.searchResults.observe(viewLifecycleOwner, { result ->
+            when(result) {
+                is ViewState.Loading -> {}
+                is ViewState.Success -> {
+                    adapter.setList(result.value!!)
+                    adapter.notifyDataSetChanged()
+                }
+                is ViewState.Error -> {}
+            }
         })
     }
 
