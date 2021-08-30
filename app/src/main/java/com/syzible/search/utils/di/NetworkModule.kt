@@ -1,4 +1,4 @@
-package com.syzible.di
+package com.syzible.search.utils.di
 
 import com.apollographql.apollo.ApolloClient
 import dagger.Module
