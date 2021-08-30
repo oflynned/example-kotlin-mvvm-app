@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/SearchFragment"
         android:name="com.syzible.search.search.SearchFragment"
-        android:label="@string/first_fragment_label"
+        android:label="Search Results"
         tools:layout="@layout/fragment_search_results">
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SearchDetailView"
         android:name="com.syzible.search.detailview.DetailViewFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Search Detail View"
         tools:layout="@layout/fragment_search_detail_view">
 
         <action
