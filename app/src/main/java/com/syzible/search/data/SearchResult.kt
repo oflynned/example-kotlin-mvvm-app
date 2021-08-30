@@ -1,4 +1,4 @@
-package com.syzible.search.search
+package com.syzible.search.data
 
 import com.syzible.search.type.DrinkCategory
 
