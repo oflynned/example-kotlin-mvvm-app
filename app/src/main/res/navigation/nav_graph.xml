@@ -21,6 +21,21 @@
         android:label="Search Detail View"
         tools:layout="@layout/fragment_search_detail_view">
 
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="abv"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="styles"
+            app:argType="string[]"
+            app:nullable="false" />
+
         <action
             android:id="@+id/action_detail_view_to_search_results"
             app:destination="@id/SearchFragment" />
