@@ -1,4 +1,4 @@
-package com.syzible.search
+package com.syzible.search.presentation
 
 import org.junit.Test
 

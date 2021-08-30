@@ -1,4 +1,4 @@
-package com.syzible.search
+package com.syzible.search.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
